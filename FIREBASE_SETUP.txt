@@ -1,0 +1,25 @@
+ConnectBazar Firebase Setup
+
+1) Firebase Console খুলুন: https://console.firebase.google.com
+2) Add project করুন: connectbazar-shop
+3) Build > Firestore Database > Create database করুন
+4) Start in test mode দিন (পরীক্ষার জন্য)
+5) Project Settings > General > Your apps > Web app তৈরি করুন
+6) যে config পাবেন সেটা firebase-config.js ফাইলে paste করুন
+7) GitHub-এ সব file upload করুন, Vercel auto deploy হবে
+
+Firestore collection name: orders
+Admin Panel: cb-admin-control.html
+Admin PIN: 1234
+
+Test mode rules example:
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /orders/{orderId} {
+      allow read, write: if true;
+    }
+  }
+}
+
+Live করার আগে rules secure করতে হবে।

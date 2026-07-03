@@ -1,7 +1,48 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>CB Admin Control</title><style>body{font-family:Arial;background:#111827;color:white;margin:0}.wrap{max-width:1000px;margin:auto;padding:20px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:#1f2937;border-radius:18px;padding:20px}.btn{background:#22c55e;color:#fff;padding:12px 16px;border-radius:10px;display:inline-block}@media(max-width:700px){.grid{grid-template-columns:1fr}}</style></head><body><div class="wrap"><h1>Hidden Admin Panel</h1><p>PIN: 1234</p><div class="grid"><div class="card"><h3>Sellers</h3><p>Manage Seller IDs</p></div><div class="card"><h3>Products</h3><p>Approve deals</p></div><div class="card"><h3>Coupons</h3><p>Manage coupons</p></div><div class="card"><h3>Offers</h3><p>Local offers</p></div></div></div><div id="toast" class="toast">Added to cart</div><script>
-function getCart(){return JSON.parse(localStorage.getItem('cb_cart')||'[]')}
-function saveCart(c){localStorage.setItem('cb_cart',JSON.stringify(c));updateCartCount()}
-function addToCart(name,price){let c=getCart();let item=c.find(x=>x.name===name); if(item){item.qty++}else{c.push({name,price,qty:1})} saveCart(c); let t=document.getElementById('toast'); if(t){t.style.display='block'; setTimeout(()=>t.style.display='none',1400)}}
-function updateCartCount(){let n=getCart().reduce((a,b)=>a+b.qty,0); document.querySelectorAll('#cartCount').forEach(e=>e.textContent=n)}
-document.addEventListener('DOMContentLoaded',updateCartCount);
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>CB Admin Control</title><style>
+*{box-sizing:border-box}body{font-family:Arial;background:#0f172a;color:white;margin:0}.login,.wrap{max-width:1150px;margin:auto;padding:20px}.login{max-width:420px;margin-top:80px;background:#111827;border:1px solid #334155;border-radius:22px}.login input{width:100%;padding:14px;border-radius:12px;border:1px solid #334155;background:#020617;color:#fff;margin:10px 0}.btn{border:0;background:#22c55e;color:#fff;padding:11px 15px;border-radius:10px;font-weight:800;cursor:pointer}.danger{background:#ef4444}.dark{background:#1f2937}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:#1e293b;border:1px solid #334155;border-radius:18px;padding:18px}.orders{display:grid;gap:14px;margin-top:18px}.order{background:#fff;color:#111827;border-radius:18px;padding:18px}.order h3{margin:0 0 8px}.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:#f1f5f9;border-radius:12px;padding:12px;margin:10px 0}.item{border-bottom:1px solid #e5e7eb;padding:8px 0}.top{display:flex;align-items:center;justify-content:space-between;gap:10px}.status{padding:8px 12px;border-radius:999px;background:#dcfce7;color:#166534;font-weight:900}.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}select{padding:10px;border-radius:10px;border:1px solid #cbd5e1}.empty{padding:25px;text-align:center;background:#1e293b;border-radius:18px;color:#cbd5e1}@media(max-width:760px){.grid,.meta{grid-template-columns:1fr}.top{display:block}.login{margin:25px 12px}.wrap{padding:12px}}
+</style></head><body><div id="loginBox" class="login"><h1>🔐 Hidden Admin Panel</h1><p>Enter PIN to view orders.</p><input id="pin" type="password" placeholder="Admin PIN"><button class="btn" onclick="login()">Login</button><p style="color:#94a3b8">Demo PIN: 1234</p></div><div id="app" class="wrap" style="display:none"><div class="top"><div><h1>ConnectBazar Admin</h1><p>Orders, Products, Coupons, Sellers</p></div><button class="btn danger" onclick="logout()">Logout</button></div><div class="grid"><div class="card"><h3>Orders</h3><h2 id="orderCount">0</h2><p>Customer orders</p></div><div class="card"><h3>Sellers</h3><h2>Private</h2><p>Manage Seller IDs</p></div><div class="card"><h3>Products</h3><h2>Approval</h2><p>Approve deals</p></div><div class="card"><h3>Coupons</h3><h2>Active</h2><p>Manage coupons</p></div></div><div class="top" style="margin-top:25px"><h2>📦 Order List</h2><div class="tools"><button class="btn" onclick="renderOrders()">Refresh</button><button class="btn danger" onclick="clearOrders()">Clear All Orders</button></div></div><div id="orders" class="orders"></div></div>
+<script src="firebase-config.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, updateDoc, deleteDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+const cfg = window.CB_FIREBASE_CONFIG || {};
+window.cbFirebaseReady = false;
+if(cfg.apiKey && !String(cfg.apiKey).includes('PASTE_')){
+  try{
+    const app = initializeApp(cfg);
+    window.cbDB = getFirestore(app);
+    window.cbFirebaseReady = true;
+  }catch(e){ console.warn('Firebase init failed', e); }
+}
+window.cbAddOrderFirebase = async function(order){
+  if(!window.cbFirebaseReady) return null;
+  const ref = await addDoc(collection(window.cbDB,'orders'), {...order, createdAt: serverTimestamp()});
+  return ref.id;
+};
+window.cbGetOrdersFirebase = async function(){
+  if(!window.cbFirebaseReady) return [];
+  const q = query(collection(window.cbDB,'orders'), orderBy('createdAt','desc'));
+  const snap = await getDocs(q);
+  return snap.docs.map(d=>({fireId:d.id, ...d.data()}));
+};
+window.cbUpdateOrderFirebase = async function(fireId, data){
+  if(!window.cbFirebaseReady || !fireId) return;
+  await updateDoc(doc(window.cbDB,'orders',fireId), data);
+};
+window.cbDeleteOrderFirebase = async function(fireId){
+  if(!window.cbFirebaseReady || !fireId) return;
+  await deleteDoc(doc(window.cbDB,'orders',fireId));
+};
+</script>
+<script>
+function login(){if(document.getElementById('pin').value==='1234'){localStorage.setItem('cb_admin_login','yes');showApp()}else alert('Wrong PIN')}
+function logout(){localStorage.removeItem('cb_admin_login');location.reload()}
+function showApp(){document.getElementById('loginBox').style.display='none';document.getElementById('app').style.display='block';renderOrders()}
+function getOrders(){return JSON.parse(localStorage.getItem('cb_orders')||'[]')}
+function saveOrders(o){localStorage.setItem('cb_orders',JSON.stringify(o));renderOrders()}
+async function setStatus(i,val){let o=window.currentOrders||getOrders();o[i].status=val;if(o[i].fireId&&window.cbUpdateOrderFirebase){await window.cbUpdateOrderFirebase(o[i].fireId,{status:val})}else{saveOrders(o)}renderOrders()}
+async function deleteOrder(i){if(confirm('Delete this order?')){let o=window.currentOrders||getOrders();if(o[i].fireId&&window.cbDeleteOrderFirebase){await window.cbDeleteOrderFirebase(o[i].fireId)}else{o.splice(i,1);saveOrders(o)}renderOrders()}}
+function clearOrders(){if(confirm('Local orders clear korben? Firebase orders individually delete korun.')){localStorage.removeItem('cb_orders');renderOrders()}}
+async function renderOrders(){let orders=[];try{orders=(window.cbFirebaseReady&&window.cbGetOrdersFirebase)?await window.cbGetOrdersFirebase():getOrders()}catch(e){console.warn(e);orders=getOrders()}window.currentOrders=orders;document.getElementById('orderCount').textContent=orders.length;let box=document.getElementById('orders');if(!orders.length){box.innerHTML='<div class="empty">No orders yet. Customer order korle ekhane show korbe.</div>';return}box.innerHTML=orders.map((o,i)=>`<div class="order"><div class="top"><div><h3>${o.id}</h3><b>${o.date||''}</b></div><span class="status">${o.status||'New Order'}</span></div><div class="meta"><div><b>Name</b><br>${o.customer?.name||''}</div><div><b>Mobile</b><br><a href="tel:${o.customer?.mobile||''}">${o.customer?.mobile||''}</a></div><div><b>PIN Code</b><br>${o.customer?.pincode||''}</div><div><b>Payment</b><br>${o.customer?.payment||''}</div></div><p><b>Address:</b> ${o.customer?.address||''}</p><p><b>Landmark:</b> ${o.customer?.landmark||''}</p><p><b>Notes:</b> ${o.customer?.notes||''}</p><h4>Items</h4>${(o.items||[]).map(x=>`<div class="item"><b>${x.name}</b><br>Buy From: ${x.seller||'ConnectBazar'} | Qty: ${x.qty} | Price: ₹${x.price*x.qty}</div>`).join('')}<h3>Total: ₹${o.total||0}</h3><div class="tools"><select onchange="setStatus(${i},this.value)"><option ${o.status==='New Order'?'selected':''}>New Order</option><option ${o.status==='Processing'?'selected':''}>Processing</option><option ${o.status==='Confirmed'?'selected':''}>Confirmed</option><option ${o.status==='Delivered'?'selected':''}>Delivered</option><option ${o.status==='Cancelled'?'selected':''}>Cancelled</option></select><a class="btn" href="https://wa.me/91${o.customer?.mobile||''}" target="_blank">WhatsApp Customer</a><button class="btn danger" onclick="deleteOrder(${i})">Delete</button></div></div>`).join('')}
+if(localStorage.getItem('cb_admin_login')==='yes')showApp();
 </script></body></html>
