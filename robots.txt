@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /cb-admin-control.html
+Disallow: /seller-access.html
+Disallow: /seller-dashboard.html
+Disallow: /shop-submit.html
