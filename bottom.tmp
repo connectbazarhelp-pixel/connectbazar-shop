@@ -1,0 +1,1 @@
+<div class="bottom"><a href="index.html">🏠<br>Home</a><a href="products.html">🛍️<br>Products</a><a href="offers.html">🏪<br>Offers</a><a href="coupons.html">🎟️<br>Coupons</a><a href="cart.html">🛒<br>Cart</a></div><div class="footer">© ConnectBazar.in — Multi Seller Marketplace</div><script src="firebase-config.js"></script><script src="app.js"></script>
