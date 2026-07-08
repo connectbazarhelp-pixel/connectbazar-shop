@@ -1,1 +1,186 @@
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:#111827}a{text-decoration:none;color:inherit}.top{position:sticky;top:0;background:#fff;border-bottom:1px solid #e5e7eb;z-index:10}.nav{max-width:1180px;margin:auto;display:flex;align-items:center;gap:18px;padding:14px}.logo{font-size:24px;font-weight:900}.logo span{color:#ff5b2e}.search{flex:1;display:flex;background:#eef2ff;border-radius:14px;overflow:hidden}.search input{flex:1;border:0;padding:13px;background:transparent;outline:0}.btn,.search button{border:0;background:#2563eb;color:white;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}.dark{background:#111827}.orange{background:#ff5b2e}.green{background:#16a34a}.outline{background:#eaf1ff;color:#2563eb}.links{display:flex;gap:15px;font-weight:800;font-size:14px}.hero,.section{max-width:1180px;margin:24px auto}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:20px}.banner{background:linear-gradient(135deg,#06a77d,#1269f3);border-radius:28px;color:#fff;padding:36px;box-shadow:0 18px 40px #0f172a22}.banner h1{font-size:46px;line-height:1.05;margin:14px 0}.panel,.card{background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:18px;box-shadow:0 10px 24px #0f172a0b}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.pic{height:140px;border-radius:16px;background:linear-gradient(135deg,#dbeafe,#fce7f3);display:flex;align-items:center;justify-content:center;font-size:50px}.price{font-weight:900;color:#16a34a;font-size:22px}.old{text-decoration:line-through;color:#94a3b8}.seller{display:flex;justify-content:space-between;gap:10px;align-items:center;border:1px solid #e5e7eb;border-radius:16px;padding:13px;margin:10px 0;background:#fff}.badge{display:inline-block;background:#dcfce7;color:#166534;padding:5px 9px;border-radius:999px;font-weight:800;font-size:12px}.actions{display:flex;gap:8px;flex-wrap:wrap}.small{font-size:13px;color:#64748b}.table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden}.table th,.table td{padding:12px;border-bottom:1px solid #e5e7eb;text-align:left}.form{display:grid;gap:12px}.form input,.form textarea,.form select{width:100%;padding:13px;border:1px solid #d1d5db;border-radius:12px}.bottom{display:none}.footer{text-align:center;padding:30px;color:#64748b}@media(max-width:760px){.nav{flex-wrap:wrap}.links{display:none}.search{order:3;flex-basis:100%}.hero{grid-template-columns:1fr;margin:12px}.banner{padding:24px}.banner h1{font-size:32px}.section{margin:20px 12px}.grid{grid-template-columns:1fr}.seller{display:block}.actions{margin-top:10px}.bottom{display:flex;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e5e7eb;justify-content:space-around;padding:8px;z-index:20}.bottom a{text-align:center;font-size:12px;font-weight:800}.footer{padding-bottom:70px}}
+/* ==========================================================================
+   ConnectBazar Design System
+   Bazar Receipt — price-tag & ticket motifs for a multi-seller marketplace
+   ========================================================================== */
+
+:root{
+  --ink:#161a21;
+  --ink-soft:#454b57;
+  --paper:#f7f6f2;
+  --surface:#ffffff;
+  --line:#e6e2d6;
+  --marigold:#e8890c;
+  --marigold-dark:#c56f04;
+  --teal:#0b6e63;
+  --teal-dark:#08544c;
+  --teal-tint:#e4f3f0;
+  --sindoor:#c1392b;
+  --sindoor-tint:#fbe8e5;
+  --gold-tint:#fdf1de;
+  --muted:#8a8577;
+  --radius-lg:22px;
+  --radius-md:16px;
+  --radius-sm:10px;
+  --shadow-card:0 10px 26px rgba(22,26,33,.07);
+  --shadow-pop:0 20px 46px rgba(22,26,33,.16);
+  --font-display:'Big Shoulders Display',Impact,'Arial Narrow',sans-serif;
+  --font-body:'Inter',Arial,Helvetica,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font-body);background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+h1,h2,h3{font-family:var(--font-display);font-weight:700;letter-spacing:.2px;margin:0 0 8px}
+:focus-visible{outline:3px solid var(--marigold);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- Header / Nav ---------- */
+.top{position:sticky;top:0;background:var(--surface);border-bottom:1px solid var(--line);z-index:30}
+.nav{max-width:1180px;margin:auto;display:flex;align-items:center;gap:16px;padding:12px 16px}
+.logo{font-family:var(--font-display);font-size:28px;font-weight:700;letter-spacing:.3px;display:flex;align-items:center;gap:8px}
+.logo::before{content:"";width:30px;height:30px;border-radius:9px;flex:none;background:
+    linear-gradient(135deg,var(--marigold),var(--sindoor));
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
+.logo span{color:var(--marigold)}
+.search{flex:1;display:flex;background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.search input{flex:1;border:0;padding:12px 14px;background:transparent;outline:0;font-size:15px;font-family:var(--font-body);color:var(--ink)}
+.search button{border:0;background:var(--ink);color:#fff;padding:0 18px;font-weight:700;cursor:pointer;font-family:var(--font-body)}
+.links{display:flex;gap:18px;font-weight:700;font-size:14px;align-items:center;white-space:nowrap}
+.links a:hover{color:var(--marigold)}
+.links .cartCount{background:var(--marigold);color:#fff;border-radius:999px;padding:1px 7px;font-size:11px;font-family:var(--font-mono);margin-left:2px}
+
+/* ---------- Buttons ---------- */
+.btn,.search button{border:0;background:var(--marigold);color:#fff;border-radius:12px;padding:13px 18px;font-weight:700;cursor:pointer;font-family:var(--font-body);font-size:15px;transition:transform .12s ease,box-shadow .12s ease,background .12s ease;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn:hover{background:var(--marigold-dark);transform:translateY(-1px);box-shadow:0 8px 18px rgba(232,137,12,.28)}
+.btn:active{transform:translateY(0)}
+.btn.dark{background:var(--ink)}
+.btn.dark:hover{background:#000;box-shadow:0 8px 18px rgba(0,0,0,.25)}
+.btn.orange{background:var(--sindoor)}
+.btn.orange:hover{background:#a52e22;box-shadow:0 8px 18px rgba(193,57,43,.28)}
+.btn.green{background:var(--teal)}
+.btn.green:hover{background:var(--teal-dark);box-shadow:0 8px 18px rgba(11,110,99,.28)}
+.btn.outline{background:var(--teal-tint);color:var(--teal-dark);box-shadow:none}
+.btn.outline:hover{background:#d3ece6;transform:none;box-shadow:none}
+.btn.cartbtn{background:var(--ink)}
+
+/* ---------- Layout ---------- */
+.hero,.section{max-width:1180px;margin:22px auto;padding:0 16px}
+.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:18px}
+.banner{position:relative;overflow:hidden;background:var(--ink);border-radius:var(--radius-lg);color:#fff;padding:34px;box-shadow:var(--shadow-pop)}
+.banner::after{content:"";position:absolute;right:-60px;top:-60px;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle,rgba(232,137,12,.55),transparent 70%)}
+.banner::before{content:"";position:absolute;left:-40px;bottom:-70px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(11,110,99,.45),transparent 70%)}
+.banner *{position:relative}
+.banner h1{font-size:clamp(30px,5vw,50px);line-height:1.02;margin:12px 0;max-width:16ch}
+.banner p{color:#d8d6cf;max-width:46ch;line-height:1.5}
+.badge{display:inline-block;background:var(--gold-tint);color:var(--marigold-dark);padding:5px 11px;border-radius:999px;font-weight:700;font-size:12px;font-family:var(--font-mono);letter-spacing:.3px}
+.banner .badge{background:rgba(255,255,255,.14);color:#fff}
+.private{font-size:12px;color:#a9a595;margin-top:10px}
+
+/* ---------- Panels / Cards ---------- */
+.panel,.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:18px;box-shadow:var(--shadow-card)}
+.card{display:flex;flex-direction:column;transition:transform .15s ease,box-shadow .15s ease}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-pop)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pic{height:140px;border-radius:var(--radius-md);background:linear-gradient(135deg,var(--teal-tint),var(--gold-tint));display:flex;align-items:center;justify-content:center;font-size:48px;margin-bottom:10px}
+.card h3{font-size:19px}
+
+/* Price — receipt/mono treatment, the signature motif */
+.price{font-weight:700;color:var(--teal-dark);font-size:21px;font-family:var(--font-mono)}
+.price::before{content:"₹"}
+.old{text-decoration:line-through;color:var(--muted);font-family:var(--font-mono);font-size:14px}
+
+/* ---------- Seller compare row (ticket / receipt line) ---------- */
+.seller{position:relative;display:flex;justify-content:space-between;gap:10px;align-items:center;
+  border:1px dashed var(--line);border-radius:var(--radius-md);padding:14px 16px;margin:10px 0;background:var(--surface)}
+#details .seller:first-of-type{border:1px solid var(--teal);background:linear-gradient(0deg,var(--teal-tint),#fff 70%)}
+#details .seller:first-of-type::before{content:"BEST PRICE";position:absolute;top:-10px;left:14px;background:var(--teal);color:#fff;font-family:var(--font-mono);font-size:10px;letter-spacing:.6px;padding:3px 8px;border-radius:999px}
+.seller .price{font-size:23px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:10px}
+.small{font-size:13px;color:var(--ink-soft)}
+
+/* ---------- Tables ---------- */
+.table{width:100%;border-collapse:collapse;background:var(--surface);border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-card)}
+.table th{background:var(--paper);font-family:var(--font-mono);font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-soft)}
+.table th,.table td{padding:12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.table tr:last-child td{border-bottom:0}
+
+/* ---------- Forms ---------- */
+.form{display:grid;gap:12px}
+.form label{font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:-6px}
+.form input,.form textarea,.form select{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:12px;font-size:16px;font-family:var(--font-body);background:#fff;color:var(--ink)}
+.form input:focus,.form textarea:focus,.form select:focus{border-color:var(--marigold)}
+
+/* ---------- Bottom mobile dock ---------- */
+.bottom{display:none}
+.footer{text-align:center;padding:30px 16px;color:var(--muted);font-size:13px}
+
+@media(max-width:760px){
+  .nav{flex-wrap:wrap;padding:10px 14px}
+  .logo{font-size:24px}
+  .links{display:none}
+  .search{order:3;flex-basis:100%}
+  .hero{grid-template-columns:1fr;margin:14px auto}
+  .banner{padding:24px;border-radius:20px}
+  .banner h1{max-width:none}
+  .section{margin:18px auto}
+  .grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .seller{flex-direction:column;align-items:stretch;text-align:left}
+  .seller .price{font-size:22px}
+  .actions{margin-top:12px}
+  .card h3{font-size:16px}
+  .pic{height:108px;font-size:38px}
+
+  .bottom{display:flex;position:fixed;bottom:12px;left:12px;right:12px;background:var(--ink);
+    border-radius:20px;justify-content:space-around;padding:10px 4px;z-index:40;
+    box-shadow:0 16px 34px rgba(22,26,33,.35)}
+  .bottom a{color:#cfcdc4;text-align:center;font-size:11px;font-weight:700;flex:1;padding:2px 0;border-radius:12px}
+  .bottom a:first-child{color:var(--marigold)}
+  .footer{padding-bottom:96px}
+}
+
+/* ==========================================================================
+   Categories / homepage extras
+   ========================================================================== */
+.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:12px}
+.head a{font-weight:700;color:var(--teal-dark);font-size:14px}
+.catgrid{display:grid;grid-template-columns:repeat(8,1fr);gap:12px}
+.cat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);padding:16px 8px;text-align:center;font-weight:700;font-size:13px;box-shadow:var(--shadow-card);transition:transform .12s ease}
+.cat:hover{transform:translateY(-2px);border-color:var(--marigold)}
+.shoprow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+/* Coupon ticket — scalloped stub, echoes a real paper coupon */
+.coupon,.phone{background:var(--surface);border-radius:var(--radius-lg);padding:22px;box-shadow:var(--shadow-card)}
+.coupon{position:relative;border:1px dashed var(--line)}
+.code{display:inline-block;background:var(--ink);color:#fff;border-radius:10px;padding:12px 22px;font-weight:700;letter-spacing:3px;font-family:var(--font-mono);font-size:17px}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:999px;display:none;z-index:99;font-weight:700;box-shadow:var(--shadow-pop)}
+
+@media(max-width:760px){
+  .catgrid{display:flex;overflow:auto;padding-bottom:8px;gap:10px}
+  .cat{min-width:96px}
+  .shoprow{grid-template-columns:1fr}
+}
+
+/* ==========================================================================
+   Seller / Delivery / Admin — private access panels
+   ========================================================================== */
+.seller-login-wrap{min-height:calc(100vh - 130px);display:grid;place-items:center;padding:24px 16px}
+.seller-login-card{width:min(520px,100%);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:28px;box-shadow:var(--shadow-pop)}
+.seller-logo{display:flex;align-items:center;gap:12px;font-weight:700;font-size:22px;margin-bottom:10px;font-family:var(--font-display)}
+.seller-logo .mark{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--marigold),var(--sindoor));display:grid;place-items:center;color:#fff;font-size:20px;flex:none}
+.seller-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
+.seller-tab{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 6px;text-align:center;font-size:12.5px;font-weight:700}
+.danger-note{background:var(--gold-tint);border:1px solid #f2d9ab;border-radius:14px;padding:12px 14px;color:#8a5a05;font-weight:600;font-family:var(--font-mono);font-size:13px}
+.dash-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.stat-card{background:linear-gradient(160deg,var(--teal-tint),#fff 65%);border:1px solid var(--line);border-radius:18px;padding:16px}
+.stat-card h3{font-size:26px;color:var(--teal-dark)}
+.upload-box{border:2px dashed var(--marigold);border-radius:18px;background:var(--gold-tint);padding:16px;text-align:center}
+.photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.status-pending{background:var(--gold-tint);color:#8a5a05;padding:3px 9px;border-radius:999px;font-weight:700;font-size:12px}
+.status-approved{background:var(--teal-tint);color:var(--teal-dark);padding:3px 9px;border-radius:999px;font-weight:700;font-size:12px}
+
+@media(max-width:760px){
+  .seller-tabs{grid-template-columns:1fr}
+  .photo-grid{grid-template-columns:1fr}
+}

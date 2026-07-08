@@ -1,1 +1,24 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Add Shop - ConnectBazar</title><style>body{margin:0;font-family:Arial;background:#f4f6fb}.box{max-width:760px;margin:25px auto;background:white;border-radius:22px;padding:25px;box-shadow:0 6px 20px #0001}input,textarea,select{width:100%;padding:14px;margin:8px 0 14px;border:1px solid #ddd;border-radius:12px}.btn{border:0;background:#05a357;color:white;padding:14px 20px;border-radius:12px;font-weight:900}.top{background:#fff;padding:15px 5%;box-shadow:0 4px 18px #0001}.logo{font-size:26px;font-weight:900}.logo span{color:#05a357}@media(max-width:800px){.box{margin:10px}}</style></head><body><div class="top"><div class="logo"><span>Connect</span>Bazar</div></div><div class="box"><h2>Shop Owner Offer Submit</h2><input placeholder="Shop Name"><input placeholder="Owner Name"><input placeholder="Mobile / WhatsApp"><select><option>Category</option><option>Mobile</option><option>Grocery</option><option>Fashion</option><option>Electronics</option></select><input placeholder="Shop Address"><input placeholder="Offer Title"><textarea placeholder="Offer Details"></textarea><input placeholder="Coupon Code"><input type="date"><button class="btn" onclick="alert('Demo submit done. Firebase connect korle admin approval e jabe.')">Submit Offer</button><p><a href="index.html">Back Home</a></p></div></body></html>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Add Shop Offer — ConnectBazar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<div class="top"><div class="nav"><a class="logo" href="index.html">Connect<span>Bazar</span></a><div class="links"><a href="index.html">Home</a></div></div></div>
+<main class="seller-login-wrap"><div class="seller-login-card">
+<div class="seller-logo"><div class="mark">🏪</div><div>Shop Owner<br><span class="small">Offer submission</span></div></div>
+<h1>Add Your Shop Offer</h1>
+<p class="small">Tell us about your shop and current offer. Our team reviews every submission before it goes live.</p>
+<div class="form">
+<label>Shop name</label><input placeholder="Shop name">
+<label>Owner name</label><input placeholder="Owner name">
+<label>Mobile / WhatsApp</label><input placeholder="Mobile / WhatsApp">
+<label>Category</label><select><option>Category</option><option>Mobile</option><option>Grocery</option><option>Fashion</option><option>Electronics</option></select>
+<label>Shop address</label><input placeholder="Shop address">
+<label>Offer title</label><input placeholder="Offer title">
+<label>Offer details</label><textarea placeholder="Offer details"></textarea>
+<label>Coupon code</label><input placeholder="Coupon code">
+<label>Valid until</label><input type="date">
+<button class="btn green" onclick="alert('Demo submit done. Connect Firebase to send this to admin for approval.')">Submit Offer</button>
+</div>
+<p class="small" style="margin-top:14px"><a href="index.html">← Back Home</a></p>
+</div></main>
+</body></html>
